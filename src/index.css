@@ -1,0 +1,28 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+.tf-custom {
+  width: 100%;
+  margin-top: 100px;
+}
+
+.tf-custom ul {
+  display: flex;
+  justify-content: center;
+}
+
+.tf-custom li {
+  width: 100%;
+}
+
+.tf-custom .tf-nc {
+  border-radius: 50%;
+  background: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: green;
+}
