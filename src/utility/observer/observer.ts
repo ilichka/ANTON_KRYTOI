@@ -1,34 +1,27 @@
-import {BaseTree} from "../trees/baseTree";
+import { BaseTree } from "../trees/baseTree";
 
 export class Observer {
-    lastValueChanged: number;
-    trees: Array<BaseTree<unknown>>;
-    constructor() {
-        this.lastValueChanged = 0;
-        this.trees = [];
-    }
+  lastValueChanged: number;
+  tree: BaseTree<unknown> | null;
+  constructor() {
+    this.lastValueChanged = 0;
+    this.tree = null;
+  }
 
-    setValue(value: number) {
-        this.lastValueChanged = value;
-        this.notifyAll();
-    }
+  setValue(value: number) {
+    this.lastValueChanged = value;
+    this.notify();
+  }
 
-    notifyAll() {
-        return this.trees.forEach(subs => subs.inform(this.lastValueChanged));
-    }
+  notify() {
+    this.tree?.inform(this.lastValueChanged);
+  }
 
-    register(observer: BaseTree<unknown>) {
-        this.trees.push(observer);
-    }
+  register(observer: BaseTree<unknown>) {
+    this.tree = observer;
+  }
 
-    unregister(observer: BaseTree<unknown>) {
-        // @ts-ignore
-        this.trees = this.trees.filter(el => !(el instanceof observer));
-    }
+  unregister(observer: BaseTree<unknown>) {
+    this.tree = null;
+  }
 }
-
-export const makeObservable = (instance: BaseTree<unknown>) => {
-    observer.register(instance)
-}
-
-export const observer = new Observer();

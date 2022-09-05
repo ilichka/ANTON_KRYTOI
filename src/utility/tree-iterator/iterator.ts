@@ -1,19 +1,22 @@
-import {Node} from "../BST/BST";
+import { Node } from "../trees/BST";
 
 export class Iterator {
-    strategy: (node: Node|null,cb:(value: number)=>void)=>void
+  strategy: (node: Node | null, cb: (value: number) => void) => void;
 
-    constructor(strategy: (node: Node | null,cb:(value: number)=>void)=>void) {
-        this.strategy = strategy;
-    }
+  constructor(
+    strategy: (node: Node | null, cb: (value: number) => void) => void
+  ) {
+    this.strategy = strategy;
+  }
 
-    iterate(node: Node | null, cb: (value: number) => void) {
-        console.log('starting iterate');
-        this.strategy(node, cb);
-    }
+  iterate(node: Node | null, cb: (value: number) => void) {
+    console.log("starting iterate");
+    this.strategy(node, cb);
+  }
 
-    setStrategy(strategy: (node: Node | null,cb:(value: number)=>void)=>void) {
-        this.strategy = strategy;
-    }
+  setStrategy(
+    strategy: (node: Node | null, cb: (value: number) => void) => void
+  ) {
+    this.strategy = strategy;
+  }
 }
-
