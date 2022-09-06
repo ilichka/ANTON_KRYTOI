@@ -1,23 +1,23 @@
-import { Node } from "../trees/BST";
+import { Node } from "../trees/types";
 
-export const inOrderTraverseStrategy = (
-  node: Node | null,
-  cb: (value: number) => void
-): void => {
+export function inOrderTraverseStrategy<T>(
+  node: Node<T> | null,
+  cb: (value: T) => void
+): void {
   if (node != null) {
     inOrderTraverseStrategy(node.left, cb);
     cb(node.value);
     inOrderTraverseStrategy(node.right, cb);
   }
-};
+}
 
-export const postOrderTraverseStrategy = (
-  node: Node | null,
-  cb: (value: number) => void
-): void => {
+export function postOrderTraverseStrategy<T>(
+  node: Node<T> | null,
+  cb: (value: T) => void
+): void {
   if (node != null) {
+    cb(node.value);
     postOrderTraverseStrategy(node.left, cb);
     postOrderTraverseStrategy(node.right, cb);
-    cb(node.value);
   }
-};
+}

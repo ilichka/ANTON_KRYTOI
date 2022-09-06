@@ -1,7 +1,7 @@
-import { Node } from "../../utility/trees/BST";
+import { Node } from "../../utility/trees/types";
 
-export const SubTree: React.FC<{ node: Node | null }> = ({ node }) => {
-  const createSubTree = (node: Node) => {
+export const SubTree: React.FC<{ node: Node<number> | null }> = ({ node }) => {
+  const createSubTree = (node: Node<number>) => {
     return Object.keys(node).map((key, index: number) => {
       if (key === "left" || key === "right") {
         return node[key] !== null ? (
@@ -10,6 +10,7 @@ export const SubTree: React.FC<{ node: Node | null }> = ({ node }) => {
           </li>
         ) : null;
       }
+      return null;
     });
   };
   return (

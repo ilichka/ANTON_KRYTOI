@@ -1,69 +1,38 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SubTree } from "../subTree/subTree.component";
-import { Observer } from "../../utility/observer/observer";
-import {
-  inOrderTraverseStrategy,
-  postOrderTraverseStrategy,
-} from "../../utility/tree-iterator/strategies";
-import { TreeFactory } from "../../utility/trees/treeFabric";
-import { Iterator } from "../../utility/tree-iterator/iterator";
-import { Node } from "../../utility/trees/BST";
+import { BaseTree } from "../../utility/trees/types";
 
-const bst = new TreeFactory().create("bst");
-export const iterator = new Iterator(inOrderTraverseStrategy);
-export const observer = new Observer();
-observer.register(bst);
-
-const Tree = () => {
-  const [root, setRoot] = useState<Node | null>(bst.root);
+const Tree = ({ binaryTree }: { binaryTree: BaseTree<number> }) => {
+  console.log("RENDER");
   const [number, setNumber] = useState(0);
   const [radioValue, setRadioValue] = useState("in");
-
-  useEffect(() => {
-    bst.insert(60);
-    bst.insert(53);
-    bst.insert(67);
-    bst.insert(61);
-    bst.insert(54);
-    bst.insert(51);
-    bst.insert(44);
-    bst.insert(48);
-    bst.insert(69);
-    bst.insert(31);
-    bst.insert(90);
-    bst.insert(42);
-    bst.insert(58);
-    setRoot(bst.root);
-  }, []);
 
   const changeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNumber(Number(e.target.value));
   };
 
   const addNumber = () => {
-    bst.insert(number);
-    setRoot({ ...(bst.root as Node) });
+    binaryTree.insert(number);
   };
 
   const removeNumber = () => {
-    bst.removeNode(bst.root as Node, number);
-    setRoot({ ...(bst.root as Node) });
+    binaryTree.remove(number);
   };
 
   const handleIterate = () => {
-    const res: number[] = [];
-    iterator.iterate(bst.root, (value) => {
-      res.push(value);
-    });
-    alert(JSON.stringify(res));
+    // const res: number[] = [];
+    // iterator.iterate(bst.root, (value) => {
+    //   res.push(value);
+    // });
+    // alert(JSON.stringify(res));
   };
 
   const handleRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
     const val = event.target.value;
     setRadioValue(val);
-    iterator.setStrategy(
-      val === "in" ? inOrderTraverseStrategy : postOrderTraverseStrategy
-    );
+    // iterator.setStrategy(
+    //   val === "in" ? inOrderTraverseStrategy : postOrderTraverseStrategy
+    // );
   };
 
   return (
@@ -114,7 +83,7 @@ const Tree = () => {
       <div className="tf-tree tf-custom">
         <ul>
           <li>
-            <SubTree node={root} />
+            <SubTree node={binaryTree.root} />
           </li>
         </ul>
       </div>

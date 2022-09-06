@@ -1,32 +1,10 @@
-import { BaseTree } from "../trees/baseTree";
-import { iterator, observer } from "../../components/tree/tree.component";
+import { Node, SearchableBaseTree } from "./types";
 
-export type Node = {
-  value: number;
-  left: Node | null;
-  right: Node | null;
-};
-
-export class BSTNode {
-  value: number;
-  left: Node | null;
-  right: Node | null;
-  constructor(value: number) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
-}
-
-export class BST extends BaseTree<Node> {
-  constructor() {
-    super();
-    this.root = null;
-  }
+export class BinaryTree implements SearchableBaseTree<number> {
+  public root: Node<number> | null = null;
 
   insert(value: number) {
-    observer.setValue(value);
-    let newNode = new BSTNode(value);
+    let newNode = new Node(value);
 
     if (this.root === null) {
       this.root = newNode;
@@ -35,7 +13,15 @@ export class BST extends BaseTree<Node> {
     }
   }
 
-  insertNode(node: Node | null, newNode: Node) {
+  remove(value: number) {
+    this.removeNode(this.root, value);
+  }
+
+  search(value: number): Node<number> | null {
+    return this.searchNode(this.root, value);
+  }
+
+  private insertNode(node: Node<number> | null, newNode: Node<number>) {
     if (node === null) {
       return null;
     }
@@ -54,20 +40,7 @@ export class BST extends BaseTree<Node> {
     }
   }
 
-  iterate(node: Node | null, cb: (value: number) => void) {
-    iterator.iterate(node, cb);
-  }
-
-  findMinNode(node: Node | null) {
-    let currentNode = node;
-
-    while (currentNode?.left !== null) {
-      currentNode = currentNode?.left ?? null;
-    }
-    return currentNode.value;
-  }
-
-  minNode(node: Node | null): any {
+  private minNode(node: Node<number> | null): any {
     if (node?.left === null) {
       return node;
     } else {
@@ -75,7 +48,10 @@ export class BST extends BaseTree<Node> {
     }
   }
 
-  removeNode(node: Node | null, value: number): Node | null {
+  private removeNode(
+    node: Node<number> | null,
+    value: number
+  ): Node<number> | null {
     if (node === null) {
       return null;
     } else if (value < node.value) {
@@ -104,13 +80,16 @@ export class BST extends BaseTree<Node> {
     }
   }
 
-  search(node: Node | null, value: number): Node | null {
+  private searchNode(
+    node: Node<number> | null,
+    value: number
+  ): Node<number> | null {
     if (node === null) {
       return null;
     } else if (value < node.value) {
-      return this.search(node.left, value);
+      return this.searchNode(node.left, value);
     } else if (value > node.value) {
-      return this.search(node.right, value);
+      return this.searchNode(node.right, value);
     } else {
       return node;
     }
