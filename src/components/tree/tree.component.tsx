@@ -3,7 +3,6 @@ import { SubTree } from "../subTree/subTree.component";
 import { BaseTree } from "../../utility/trees/types";
 
 const Tree = ({ binaryTree }: { binaryTree: BaseTree<number> }) => {
-  console.log("RENDER");
   const [number, setNumber] = useState(0);
   const [radioValue, setRadioValue] = useState("in");
 

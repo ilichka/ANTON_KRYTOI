@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     observableBinaryTreeRef.current.subscribe((data) => {
       console.log("subscribe data", data);
-      setTree(data);
+      setTree({...data});
     });
 
     return () => {

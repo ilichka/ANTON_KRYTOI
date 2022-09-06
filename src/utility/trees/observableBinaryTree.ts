@@ -10,13 +10,19 @@ export class ObservableBinaryTree<T> implements SearchableBaseTree<T> {
     this.root = this.binaryTree.root;
   }
 
+  setRoot(value: Node<T> | null) {
+    this.root = value
+  }
+
   insert(value: T) {
     this.binaryTree.insert(value);
+    this.setRoot(this.binaryTree.root)
     this.notify();
   }
 
   remove(value: T) {
     this.binaryTree.remove(value);
+    this.setRoot(this.binaryTree.root)
     this.notify();
   }
 
