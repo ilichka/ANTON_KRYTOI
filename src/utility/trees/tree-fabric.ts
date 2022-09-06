@@ -1,4 +1,4 @@
-import { BinaryTree } from "./binaryTree";
+import { BinaryTree } from "./binary-tree";
 
 export class TreeFactory {
   create(type: string) {

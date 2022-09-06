@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SubTree } from "../subTree/subTree.component";
+import { SubTree } from "../sub-tree/sub-tree";
 import { BaseTree } from "../../utility/trees/types";
 
 const Tree = ({ binaryTree }: { binaryTree: BaseTree<number> }) => {

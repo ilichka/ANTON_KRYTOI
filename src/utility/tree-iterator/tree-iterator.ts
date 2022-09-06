@@ -1,6 +1,6 @@
 import { Node } from "../trees/types";
 
-export class Iterator<T> {
+export class TreeIterator<T> {
   strategy: (node: Node<T> | null, cb: (value: number) => void) => void;
 
   constructor(
